@@ -9,7 +9,7 @@ class Restaurant extends Model
     protected $table = 'restaurants';
 
     protected $fillable = [
-        'dish_id', 'name', 'slug', 'thumb', 'og_image', 'type', 'address', 'time', 'price', 'rate', 'link', 'link_encode', 'status'
+        'dish_id', 'name', 'slug', 'thumb', 'og_image', 'type', 'address', 'time', 'price', 'rate', 'link', 'link_encode', 'status', 'image_type'
     ];
 
     public function menu()

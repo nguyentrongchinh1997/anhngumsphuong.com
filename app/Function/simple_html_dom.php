@@ -79,6 +79,38 @@ function getWeekday($date)
 	return $weekday;
 }
 
+function file_get_html_custom($url,
+	$use_include_path = false,
+	$context = null,
+	$offset = 0,
+	$maxLen = -1,
+	$lowercase = true,
+	$forceTagsClosed = true,
+	$target_charset = DEFAULT_TARGET_CHARSET,
+	$stripRN = true,
+	$defaultBRText = DEFAULT_BR_TEXT,
+	$defaultSpanText = DEFAULT_SPAN_TEXT)
+	{
+		$dom = new simple_html_dom;
+		$args = func_get_args();
+		$dom->load(call_user_func_array('curl_get_contents', $args), true);
+
+		return $dom;
+	}
+	
+function curl_get_contents($url)
+{
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+	$html = curl_exec($ch);
+	$data = curl_exec($ch);
+	curl_close($ch);
+
+	return $data;
+}
+
 function file_get_html(
 	$url,
 	$use_include_path = false,

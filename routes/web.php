@@ -28,3 +28,13 @@ Route::post('danh-gia', 'SiteController@review')->name('review');
 Route::get('them-nha-hang', 'SiteController@addRestaurantForm')->name('add-restaurant');
 Route::post('them-nha-hang', 'SiteController@addRestaurant')->name('add_restaurant');
 Route::get('clone', 'SiteController@clone');
+// Route::get('clone-foody', function(){
+//     $html = file_get_html_custom('https://www.foody.vn/ho-chi-minh/buffet?CategoryGroup=food&c=buffet');
+//     //$title = $html->find('.main-info-title h1', 0)->plaintext;
+//     // $price = $html->find('.res-common-minmaxprice', 0)->plaintext;
+//     // $time = $html->find('.micro-timesopen span', 2)->plaintext;
+//     // $address = $html->find('.res-common-add', 0)->plaintext;
+//     // $og_image = $html->find("meta[property='og:image']", 0)->content;
+//     echo $html;
+// });
+Route::get('clone-foody', 'SiteController@foodyClone');

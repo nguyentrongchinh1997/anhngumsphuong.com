@@ -228,6 +228,47 @@ class SiteController extends Controller
     	}
     }
 
+    public function foodyClone()
+    {
+        try {
+            $link = 'https://www.foody.vn/ho-chi-minh/buffet?ds=Restaurant&vt=row&st=1&c=39&page=';
+            for ($i = 3; $i <= 3; $i++) {
+                $html = file_get_html_custom($link . $i . '&provinceId=217&categoryId=39&append=true');
+                
+                foreach ($html->find('.row-item') as $item) {
+                    $link = 'https://www.foody.vn' . $item->find('a', 0)->href;
+                    $thumbs = $item->find('img', 0)->src;
+                    $this->foodyDetail($link, $thumbs);
+                }
+            }
+        } catch (\Throwable $th) {
+            echo $e->getMessage() . '<hr>';
+        }
+    }
+
+    public function foodyDetail($link, $thumbs)
+    {
+        try {
+            $html = file_get_html_custom($link);
+            $link_encode = md5($link);
+            $check = $this->checkClone($link_encode);
+            
+            if (!empty($html->find('.main-info-title h1')) && $check == 0) {
+                $name = \html_entity_decode($html->find('.main-info-title h1', 0)->plaintext, ENT_QUOTES, 'UTF-8');
+                $price = \html_entity_decode($html->find('.res-common-minmaxprice', 0)->plaintext, ENT_QUOTES, 'UTF-8');
+                $time = \html_entity_decode($html->find('.micro-timesopen span', 2)->plaintext, ENT_QUOTES, 'UTF-8');
+                $address = \html_entity_decode($html->find('.res-common-add', 0)->plaintext, ENT_QUOTES, 'UTF-8');
+                $og_image = $html->find("meta[property='og:image']", 0)->content;
+                $rate = rand(2,5);
+                $type = 'Buffet nướng, hải sản';
+                $result = $this->insertRestaurant1(2, $name, $type, $address, $time, $price, $rate, $link, $link_encode, $image_type = 0, $og_image, $thumbs);
+                echo "Thêm thành công<hr>";
+            }
+        } catch (\Throwable $th) {
+            echo $th->getMessage() . ": $link<hr>";
+        }
+    }
+
     public function cloneDetail($link, $thumb, $address, $name, $type)
     {
     	try {
@@ -240,7 +281,8 @@ class SiteController extends Controller
 	    		$time = $html->find('p.hours-pickup', 0)->attr['content'];
 	    		$rate = $html->find('span.pasgo-star', 0)->plaintext;
 	    		$menu = $this->menu($html->find('#thuc-don .carousel-inner .item img'));
-	    		$og_image = $html->find("meta[property='og:image']", 0)->content;
+                $og_image = $html->find("meta[property='og:image']", 0)->content;
+                
 	    		$result = $this->insertRestaurant(2, $name, $type, $address, $time, $price, $rate, $link, $link_encode);
 
 	    		if (!empty($result)) {
@@ -271,10 +313,33 @@ class SiteController extends Controller
     			'price' => $price,
     			'rate' => $rate,
     			'link' => $link,
-    			'link_encode' => $link_encode
+                'link_encode' => $link_encode,
     		]);
     	} catch (\Exception $e) {
     		return NULL;
+    	}
+    }
+
+    public function insertRestaurant1($dishId, $name, $type, $address, $time, $price, $rate, $link, $link_encode, $image_type, $og_image, $thumbs)
+    {
+    	try {
+    		return Restaurant::create([
+    			'dish_id' => $dishId,
+    			'name' => $name,
+    			'slug' => str_slug($name),
+    			'thumb' => $thumbs,
+    			'og_image' => $og_image,
+    			'type' => $type,
+    			'address' => $address,
+    			'time' => $time,
+    			'price' => $price,
+    			'rate' => $rate,
+    			'link' => $link,
+                'link_encode' => $link_encode,
+                'image_type' => $image_type
+    		]);
+    	} catch (\Exception $e) {
+    		return $e->getMessage();
     	}
     }
 

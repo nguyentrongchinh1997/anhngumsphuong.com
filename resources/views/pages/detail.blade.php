@@ -35,7 +35,13 @@
 				<div class="resto-meal-dt" style="padding-top: 0px">
 					<div class="resto-detail">
 						<div class="resto-picy">
-							<a href="{{url()->current()}}"><img width="60px" src='{{asset("upload/thumbs/$restaurant->thumb")}}' alt=""></a>
+							<a href="{{url()->current()}}">
+								@if ($restaurant->image_type == 1)
+									<img width="60px" src='{{asset("upload/thumbs/$restaurant->thumb")}}' alt="{{$restaurant->name}}">
+								@else
+									<img width="60px" src='{{$restaurant->thumb}}' alt="{{$restaurant->name}}">
+								@endif
+							</a>
 						</div>
 						<div class="name-location">
 							<a href="{{url()->current()}}"><h1 title="Review nhà hàng {{$restaurant->name}}">{{$restaurant->name}}</h1></a>
@@ -157,11 +163,17 @@
 								<div class="partner-bar">
 									<div class="partner-topbar" style="border-bottom: 0px">
 										<div class="partner-dt">
-											<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt=""></a>
+											<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
+												@if ($restaurantItem->image_type == 1)
+													<img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt="{{$restaurantItem->name}}">
+												@else
+													<img src='{{$restaurantItem->thumb}}' alt="{{$restaurantItem->name}}">
+												@endif
+											</a>
 											<div class="partner-name">
 												<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><h4 title="Review nhà hàng {{$restaurantItem->name}}">Review nhà hàng {{$restaurantItem->name}} </h4></a>
 												<p class="country">{{$restaurantItem->type}}</p>
-												<p><span><i class="fas fa-map-marker-alt"></i></span>{{$restaurantItem->address}}</p>
+									w			<p><span><i class="fas fa-map-marker-alt"></i></span>{{$restaurantItem->address}}</p>
 												<div class="bagde-dt">
 													<div class="partner-badge">
 														<a style="color: #fff" href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
@@ -192,7 +204,7 @@
 							Loại hình: {{$restaurant->type}}
 						</p>
 					</div>
-					<button class="submit-btn btn-link" style="background: #d02028; margin-left: 0px; width: 100%">Đặt chỗ ngay</button>
+					{{-- <button class="submit-btn btn-link" style="background: #d02028; margin-left: 0px; width: 100%">Đặt chỗ ngay</button> --}}
 				</div>
 			</div>
 		</div>			

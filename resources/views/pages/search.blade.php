@@ -33,7 +33,13 @@
 							<div class="partner-bar">
 								<div class="partner-topbar" style="border-bottom: 0px">
 									<div class="partner-dt">
-										<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt=""></a>
+										<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
+											@if ($restaurantItem->image_type == 1)
+												<img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt="{{$restaurantItem->name}}">
+											@else
+												<img src='{{$restaurantItem->thumb}}' alt="{{$restaurantItem->name}}">
+											@endif
+										</a>
 										<div class="partner-name">
 											<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><h4 title="Review nhà hàng {{$restaurantItem->name}}">Nhà hàng {{$restaurantItem->name}} </h4></a>
 											<p class="country">{{$restaurantItem->type}}</p>

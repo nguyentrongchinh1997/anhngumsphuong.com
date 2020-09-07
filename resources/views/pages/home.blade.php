@@ -53,7 +53,7 @@
 							<div class="places">
 								<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
 									<div class="b-icon">
-										<img style="max-width: 100%" src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt="">
+									<img style="max-width: 100%" src='@if($restaurantItem->image_type == 1){{asset("upload/thumbs/$restaurantItem->thumb")}}@else{{$restaurantItem->thumbs}}@endif' alt="{{$restaurantItem->title}}">
 									</div>
 									<div class="b-text">
 										{{$restaurantItem->name}}
@@ -83,7 +83,8 @@
 					<div class="partner-bar">
 						<div class="partner-topbar" style="border-bottom: 0px">
 							<div class="partner-dt">
-								<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt=""></a>
+								<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
+								<img src='@if($restaurantItem->image_type == 1){{asset("upload/thumbs/$restaurantItem->thumb")}}@else{{$restaurantItem->thumbs}}@endif' alt="{{$restaurantItem->name}}"></a>
 								<div class="partner-name">
 									<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><h4 title="Review nhà hàng {{$restaurantItem->name}}">Nhà hàng {{$restaurantItem->name}} </h4></a>
 									<p class="country">{{$restaurantItem->type}}</p>
@@ -98,29 +99,6 @@
 								</div>
 							</div>
 						</div>
-						{{-- <div class="partner-subbar" style="border-bottom: 0px">
-							<div class="detail-text">
-								<ul>
-									<li>Giờ đón khách : {{$restaurantItem->time}}</li>
-									<li>Giá : {{$restaurantItem->price}}</li>
-									<li>Đánh giá : 
-										<div class="review-stars">
-											@for($i = 1; $i <= $restaurantItem->rate; $i++)
-												<i class="fas fa-star"></i>
-											@endfor							
-											<span>{{$restaurantItem->rate}}</span> 									
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div> --}}
-{{-- 					<div class="partner-bottombar">
-						<ul class="bottom-partner-links">
-							<li><a href="#" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="fas fa-phone"></i>Call Now</a></li>
-							<li class="line-lr"><a href="#" data-toggle="tooltip" data-placement="top" title="Order Now"><i class="fas fa-shopping-cart"></i> Order Now</a></li>
-							<li><a href="#" data-toggle="tooltip" data-placement="top" title="View Menu"><i class="fas fa-book"></i> View Menu</a></li>
-						</ul>
-					</div> --}}
 				</div>
 			</div>
 
@@ -139,7 +117,13 @@
 					<div class="partner-bar">
 						<div class="partner-topbar" style="border-bottom: 0px">
 							<div class="partner-dt">
-								<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt=""></a>
+								<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
+									@if($restaurantItem->image_type == 1)
+										<img src='{{asset("upload/thumbs/$restaurantItem->thumb")}}' alt="">
+									@else
+										<img src="{{$restaurantItem->thumb}}" alt="">
+									@endif
+								</a>
 								<div class="partner-name">
 									<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}">
 										<h4 title="Review nhà hàng {{$restaurantItem->name}}">Nhà hàng {{$restaurantItem->name}} </h4>
@@ -156,22 +140,6 @@
 								</div>
 							</div>
 						</div>
-					{{-- 	<div class="partner-subbar" style="border-bottom: 0px">
-							<div class="detail-text">
-								<ul>
-									<li>Giờ đón khách : {{$restaurantItem->time}}</li>
-									<li>Giá : {{$restaurantItem->price}}</li>
-									<li>Đánh giá : 
-										<div class="review-stars">
-											@for($i = 1; $i <= $restaurantItem->rate; $i++)
-												<i class="fas fa-star"></i>
-											@endfor							
-											<span>{{$restaurantItem->rate}}</span> 									
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div> --}}
 					</div>
 				</div>
 			</div>
