@@ -32,8 +32,12 @@
 										<a href="index-2.html"><img src="library/images/login-register/logo.svg" alt=""></a>
 									</div>
 									<div class="social-btns">
-										<button class="facebook-btn"><i class="fab fa-facebook-f"></i>Đăng nhập với Facebook</button>
-										<button class="google-btn"><i class="fab fa-google"></i><a href="auth/google">Đăng nhập với Google</a></button>
+									    <a href="{{route('login-facebook')}}">
+									       <button type="button" class="facebook-btn"><i class="fab fa-facebook-f"></i>Đăng nhập với Facebook</button>
+									    </a>
+									    <a href="auth/google">
+									        <button type="button" class="google-btn"><i class="fab fa-google"></i>Đăng nhập với Google</button>
+									    </a>
 									</div>
 									<div class="or">
 										<p> Or </p>

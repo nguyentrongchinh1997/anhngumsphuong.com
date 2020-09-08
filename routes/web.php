@@ -10,11 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Model\Restaurant;
 
+Route::get('ads', function(){
+    $highRateRestaurant = Restaurant::all()->random(6);
+
+    return view('pages.ads', ['highRateRestaurant' => $highRateRestaurant]); 
+});
 Route::get('/', 'SiteController@home')->name('home');
 // =========================login google===========================
 Route::get('auth/google', 'SiteController@redirectToGoogle');
 Route::get('auth/google/callback', 'SiteController@handleGoogleCallback');
+// =========================end====================================
+// =========================login facebook=========================
+Route::get('/auth/redirect/facebook', 'SiteController@redirectFacebook')->name('login-facebook');
+Route::get('auth/facebook/callback', 'SiteController@callbackFacebook');
 // =========================end====================================
 Route::get('search', 'SiteController@search')->name('search');
 Route::get('nha-hang-{name}-{id}', 'SiteController@restaurantList')->where(array('id' => '[0-9]+', 'name' => '[a-z0-9\-]+'))->name('restaurant-list');

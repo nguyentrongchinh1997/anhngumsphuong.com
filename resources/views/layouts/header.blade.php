@@ -2,20 +2,11 @@
 <html lang="vi">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<base href="{{asset('')}}">
-	
-	<!-- Favicon -->
-	<link href="{{asset('library/images/fav.png')}}" rel="shortcut icon" type="image/x-icon"/>
-
 	<title>@yield('title')</title>
 	<meta name="description" content="@yield('description')">
-
-
 	<!-- Bootstrap core CSS-->
 	<link href="{{asset('library/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('library/css/style.css')}}" rel="stylesheet">

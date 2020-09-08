@@ -1,5 +1,9 @@
 @extends('layouts.index')
 
+@section('title', 'Kết quả tìm kiếm: ' . $key)
+
+@section('description', 'Nhà hàng tìm kiếm từ ' . $key . ', review nhà hàng')
+
 @section('content')
 <!--header end-->	
 <!--title-bar start-->

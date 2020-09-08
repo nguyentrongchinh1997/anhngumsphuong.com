@@ -26,3 +26,6 @@
     border: 1px solid #e6e6e6 !important;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.07);
 }
+.banner .banner-items .bnnr-text a, .banner .banner-items .bnnr-text p{
+    color: #d02028;
+}

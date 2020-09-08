@@ -54,6 +54,28 @@ class SiteController extends Controller
             return redirect('login');
         }
     }
+    
+    public function redirectFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+     public function callbackFacebook()
+    {
+        $getInfo = Socialite::driver('facebook')->user();
+        $user = User::updateOrCreate(
+            [
+                'email' => $getInfo->email
+            ],
+            [
+                'facebook_id' => $getInfo->id,
+                'name' => $getInfo->name,
+                'image' => $getInfo->avatar,
+            ]
+        );
+        auth()->login($user, true);
+        
+        return redirect()->route('home');
+    }
 
     public function search(Request $request)
     {
@@ -209,7 +231,7 @@ class SiteController extends Controller
     {
     	try {
     		$thumb = $address = $name = $type = NULL;
-	    	$html = file_get_html('https://pasgo.vn/ha-noi/nha-hang/buffet-29?page=2');
+	    	$html = file_get_html('https://pasgo.vn/ha-noi/nha-hang/tiec-cuoi-143');
 
 	    	foreach ($html->find('.wapfoody .wapitem') as $wapitem) {
 	    		if (empty($wapitem->find('img', 0)->attr['data-src'])) {
@@ -282,8 +304,9 @@ class SiteController extends Controller
 	    		$rate = $html->find('span.pasgo-star', 0)->plaintext;
 	    		$menu = $this->menu($html->find('#thuc-don .carousel-inner .item img'));
                 $og_image = $html->find("meta[property='og:image']", 0)->content;
-                
 	    		$result = $this->insertRestaurant(2, $name, $type, $address, $time, $price, $rate, $link, $link_encode);
+	    		$og_image = $html->find("meta[property='og:image']", 0)->content;
+	    		$result = $this->insertRestaurant(14, $name, $type, $address, $time, $price, $rate, $link, $link_encode);
 
 	    		if (!empty($result)) {
 	    			$this->uploadImage($menu, $thumb, $og_image, $name, $result->id);

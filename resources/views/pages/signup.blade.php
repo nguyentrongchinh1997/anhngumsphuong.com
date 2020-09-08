@@ -59,8 +59,13 @@
 										<p> Or </p>
 									</div>
 									<div class="social-btns">
-										<button class="facebook-btn"><i class="fab fa-facebook-f"></i>Đăng nhập với Facebook</button>
-										<button class="google-btn"><i class="fab fa-google"></i>Đăng nhập với Google</button>
+									    <a href="{{route('login-facebook')}}">
+									       <button type="button" class="facebook-btn"><i class="fab fa-facebook-f"></i>Đăng nhập với Facebook</button>
+									    </a>
+									    <a href="auth/google">
+									        <button type="button" class="google-btn"><i class="fab fa-google"></i>Đăng nhập với Google</button>
+									    </a>
+										
 									</div>
 									<div class="forgot-password">	
 										<p>Bạn đã có tài khoản?<a href="{{route('login-form')}}"><span style="color:#ffa803;"> - Đăng Nhập</span></a></p>

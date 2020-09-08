@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', $dish->name . ' - Nhà hàng chuyên ' . $dish->name)
+@section('title', $dish->name . ' - Nhà hàng chuyên ' . $dish->name . '- Tổng hợp nhà hàng chuyên đồ ' . $dish->name . 'tại Hà Nội')
 
 @section('description', 'Nhà hàng chuyên ' . $dish->name . '. Tổng hợp nhà hàng chuyên ' . $dish->name . ', danh sách nhà hàng chuyên ' . $dish->name)
 
@@ -68,7 +68,7 @@
 					<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid" id="myTab">
 						<a href="#timeline"  data-toggle="tab" class="item user-tab cursor-pointer active">Các món ăn</a>
 						@foreach($dishShare as $dishItem)
-							<a href="#about" data-toggle="tab" class="item user-tab cursor-pointer">{{$dishItem->name}} 
+							<a href="{{route('restaurant-list', ['slug' => $dishItem->slug, 'id' => $dishItem->id])}}" class="item user-tab cursor-pointer">{{$dishItem->name}} 
 								<span class="n-badge">{{count($dishItem->restaurant)}}</span>
 							</a>
 						@endforeach

@@ -50,16 +50,26 @@ class SiteService
 
 		if (!empty($request->address)) {
 			$address = $request->address;
+			$restaurantList = $this->restaurantModel
+							       ->orWhere('address', 'like', '%' . $address . '%')
+							       ->paginate(20);
 		}
 		if (!empty($request->restaurant)) {
 			$restaurant = $request->restaurant;
+			$restaurantList = $this->restaurantModel
+							       ->orWhere('name', 'like', '%' . $restaurant . '%')
+							       ->paginate(20);
 		}
-		$restaurantList = $this->restaurantModel->where('name', 'like', '%' . $restaurant . '%')
+		
+		if ($address != NULL && $address != NULL) {
+		    $restaurantList = $this->restaurantModel->where('name', 'like', '%' . $restaurant . '%')
 							   ->orWhere('address', 'like', '%' . $address . '%')
 							   ->paginate(20);
+		}
 
 		return [
-			'restaurantList' => $restaurantList
+			'restaurantList' => $restaurantList,
+			'key' => $restaurant . ', ' . $address
 		];
 	}
 

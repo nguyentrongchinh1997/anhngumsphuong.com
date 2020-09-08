@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Nhà hàng ' . $restaurant->name . ' | Review nhà hàng ' . $restaurant->name)
+@section('title', 'Review nhà hàng ' . $restaurant->name . ' | Nhà hàng ' . $restaurant->name . ' | Thực đơn nhà hàng ' . $restaurant->name)
 
 @section('description', 'Review nhà hàng ' . $restaurant->name . '. Địa chỉ: ' . $restaurant->address)
 
@@ -44,7 +44,7 @@
 							</a>
 						</div>
 						<div class="name-location">
-							<a href="{{url()->current()}}"><h1 title="Review nhà hàng {{$restaurant->name}}">{{$restaurant->name}}</h1></a>
+							<a href="{{url()->current()}}"><h1 title="Review nhà hàng {{$restaurant->name}}">Review nhà hàng {{$restaurant->name}}</h1></a>
 							<p><span><i class="fas fa-map-marker-alt"></i></span>{{$restaurant->address}}</p>
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 												@endif
 											</a>
 											<div class="partner-name">
-												<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><h4 title="Review nhà hàng {{$restaurantItem->name}}">Review nhà hàng {{$restaurantItem->name}} </h4></a>
+												<a href="{{route('detail', ['slug' => $restaurantItem->slug, 'id' => $restaurantItem->id])}}"><h4 title="Review nhà hàng {{$restaurantItem->name}}">Nhà hàng {{$restaurantItem->name}} </h4></a>
 												<p class="country">{{$restaurantItem->type}}</p>
 									w			<p><span><i class="fas fa-map-marker-alt"></i></span>{{$restaurantItem->address}}</p>
 												<div class="bagde-dt">
@@ -189,6 +189,11 @@
 						</div>
 					@endforeach
 				</div>
+				<div class="row">
+				    <div class="col-lg-12">
+				        Nhà hàng {{$restaurant->name}}, nhà hàng {{$restaurant->name}} có ngon không, review nhà hàng {{$restaurant->name}}, có nên ăn ở {{$restaurant->name}}
+				    </div>
+				</div>
 			</div>
 			<div class="col-lg-4 col-md-4">
 				<div class="right-side" style="position: sticky; top: 10px">
@@ -204,7 +209,9 @@
 							Loại hình: {{$restaurant->type}}
 						</p>
 					</div>
-					{{-- <button class="submit-btn btn-link" style="background: #d02028; margin-left: 0px; width: 100%">Đặt chỗ ngay</button> --}}
+					{{--<a href="{{$restaurant->link}}" target="_blank" rel="notfollow">
+					    <button class="submit-btn btn-link" style="background: #d02028; margin-left: 0px; width: 100%; border: 0px">Đặt chỗ ngay</button>
+					</a>--}}
 				</div>
 			</div>
 		</div>			
