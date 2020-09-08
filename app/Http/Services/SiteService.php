@@ -78,7 +78,7 @@ class SiteService
 		$restaurant = $this->restaurantModel->findOrFail($id);
 		$restaurant->increment('view');
 		$comments = $this->commentModel->where('restaurant_id', $id)->paginate(20);
-		$restaurantsBestView = $this->restaurantModel->where('id', '!=', $id)->latest('view')->take(6)->get();
+		$restaurantsBestView = $this->restaurantModel->where('id', '!=', $id)->get()->random(6);
 
 		return [
 			'restaurant' => $restaurant,

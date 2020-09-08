@@ -284,7 +284,7 @@ class SiteController extends Controller
                 $rate = rand(2,5);
                 $type = 'Buffet nướng, hải sản';
                 $result = $this->insertRestaurant1(2, $name, $type, $address, $time, $price, $rate, $link, $link_encode, $image_type = 0, $og_image, $thumbs);
-                echo "Thêm thành công<hr>";
+                echo "$result<hr>";
             }
         } catch (\Throwable $th) {
             echo $th->getMessage() . ": $link<hr>";
@@ -346,7 +346,7 @@ class SiteController extends Controller
     public function insertRestaurant1($dishId, $name, $type, $address, $time, $price, $rate, $link, $link_encode, $image_type, $og_image, $thumbs)
     {
     	try {
-    		return Restaurant::create([
+    		Restaurant::create([
     			'dish_id' => $dishId,
     			'name' => $name,
     			'slug' => str_slug($name),
@@ -361,6 +361,8 @@ class SiteController extends Controller
                 'link_encode' => $link_encode,
                 'image_type' => $image_type
     		]);
+    		
+    		return 'Success';
     	} catch (\Exception $e) {
     		return $e->getMessage();
     	}
